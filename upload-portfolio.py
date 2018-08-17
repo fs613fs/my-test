@@ -19,7 +19,7 @@ def lambda_handler(event, context):
             for artifact in job["data"]["inputArtifacts"]:
                 if artifact["name"] == "MyAppBuild":
                     location = artifact["location"]["s3location"]
-        print "Building portfolio from " + str(location)
+                    print "Building portfolio from " + str(location)
 
         s3 = boto3.resource('s3')
 
@@ -42,3 +42,5 @@ def lambda_handler(event, context):
     except Exception, e:
         topic.publish(Subject="Portfolio Deployment Failed", Message="Portfolio Deployment Failed")
         raise e
+
+    return 'Hello From Lambda'
